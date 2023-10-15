@@ -10,12 +10,19 @@
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="800.0">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="282.0" mnemonicParsing="false" onAction="#createProjectOp" text="Create Project" textFill="#0095ff" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="236.0" mnemonicParsing="false" onAction="#createProjectOp" text="Create Project" textFill="#0095ff">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
             <Label contentDisplay="CENTER" layoutX="273.0" layoutY="21.0" text="Bug Tracker" textAlignment="CENTER" textFill="#0095ff">
                <font>
                   <Font size="50.0" />
                </font>
             </Label>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="308.0" mnemonicParsing="false" onAction="#showProjectsOp" text="Show Projects" textFill="#0095ff">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>

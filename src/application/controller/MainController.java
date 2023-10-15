@@ -3,6 +3,7 @@ package application.controller;
 import java.io.IOException;
 import java.net.URL;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +18,24 @@ public class MainController {
 		
 		URL url = getClass().getClassLoader().getResource("view/CreateProject.fxml");
 		
+		try {
+			AnchorPane pane1 = (AnchorPane) FXMLLoader.load(url);
+			
+			if (mainBox.getChildren().size() > 0)
+				mainBox.getChildren().remove(0);
+				
+			mainBox.getChildren().add(pane1);
+		} 
+		
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML public void showProjectsOp() {
+		URL url = getClass().getClassLoader().getResource("view/ShowProjects.fxml");
+    
 		try {
 			AnchorPane pane1 = (AnchorPane) FXMLLoader.load(url);
 			
