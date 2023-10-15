@@ -20,7 +20,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="46.0" layoutY="158.0" promptText="required">
+      <TextField fx:id="projectName" layoutX="46.0" layoutY="158.0" promptText="required">
          <font>
             <Font size="24.0" />
          </font>
@@ -36,9 +36,9 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextArea layoutX="53.0" layoutY="411.0" prefHeight="185.0" prefWidth="675.0" />
+      <TextArea fx:id="projectDesc" layoutX="53.0" layoutY="411.0" prefHeight="185.0" prefWidth="675.0" />
       <Button layoutX="31.0" layoutY="752.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" />
-      <Button layoutX="267.0" layoutY="693.0" mnemonicParsing="false" onAction="#confirmNewProjectOp" prefHeight="45.0" prefWidth="224.0" text="Confirm">
+      <Button fx:id="confirmButton" layoutX="267.0" layoutY="693.0" mnemonicParsing="false" onAction="#confirmNewProjectOp" prefHeight="45.0" prefWidth="224.0" text="Confirm">
          <font>
             <Font size="24.0" />
          </font>

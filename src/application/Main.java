@@ -29,6 +29,10 @@ public class Main extends Application {
 		}
 	}
 	
+	public void saveProject() {
+		
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
