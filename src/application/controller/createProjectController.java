@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -45,23 +46,14 @@ public class createProjectController{
 		confirmButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				confirmNewProjectOp();
+				confirmNewProjectOp(event);
 			}
 		});
 	}
 	
 	@FXML 
 	public void backFromCreateProjectOp(ActionEvent event) {
-		try {
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		commonObjects.backToMainMenu(event, stage, scene, root);
 	}
 	
 	@FXML 
@@ -70,7 +62,8 @@ public class createProjectController{
 	}
 	
 	@FXML 
-	public void confirmNewProjectOp() {
+	public void confirmNewProjectOp(ActionEvent event) {
+		commonObjects.backToMainMenu(event, stage, scene, root);
 		try {
 			File savedProjects = new File("./data/saved-projects.csv");
 			boolean newFile = !savedProjects.exists();
