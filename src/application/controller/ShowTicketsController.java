@@ -55,23 +55,23 @@ public class ShowTicketsController {
 
     public void updateDisplay(String projectId) throws IOException {
     	ticketListView.getItems().clear();
-    	List<String> tickets = getTicketNames(ticketPath, projectId);
+    	List<String> tickets = commonObjects.getTicketNames(ticketPath, projectId);
     	ticketListView.getItems().addAll(tickets);
     }
     
-    public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
-        List<String> ticketNames = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] columns = line.split("\\|");
-                if (columns[0].trim().equals(projectId)) {
-                    ticketNames.add(columns[1].trim());
-                }
-            }
-        }
-        return ticketNames;
-    }
+//    public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
+//        List<String> ticketNames = new ArrayList<>();
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] columns = line.split("\\|");
+//                if (columns[0].trim().equals(projectId)) {
+//                    ticketNames.add(columns[1].trim());
+//                }
+//            }
+//        }
+//        return ticketNames;
+//    }
     
     @FXML 
 	public void backFromCreateProjectOp(ActionEvent event) {

@@ -54,6 +54,20 @@ public class CommonObjects {
         return projectNames;
 	}
 	
+	public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
+        List<String> ticketNames = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] columns = line.split("\\|");
+                if (columns[0].trim().equals(projectId)) {
+                    ticketNames.add(columns[1].trim());
+                }
+            }
+        }
+        return ticketNames;
+    }
+	
 	public static List<List<String>> readProjectNamesAndSerialNumber(String filePath) throws IOException {
         List<List<String>> resultList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
