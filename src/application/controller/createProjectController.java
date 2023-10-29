@@ -1,7 +1,6 @@
 package application.controller;
 
 import java.io.File;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -46,14 +45,23 @@ public class createProjectController{
 		confirmButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				confirmNewProjectOp(event);
+				confirmNewProjectOp();
 			}
 		});
 	}
 	
 	@FXML 
 	public void backFromCreateProjectOp(ActionEvent event) {
-		commonObjects.backToMainMenu(event, stage, scene, root);
+		try {
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML 
@@ -62,20 +70,24 @@ public class createProjectController{
 	}
 	
 	@FXML 
-	public void confirmNewProjectOp(ActionEvent event) {
-		commonObjects.backToMainMenu(event, stage, scene, root);
+	public void confirmNewProjectOp() {
 		try {
 			File savedProjects = new File("./data/saved-projects.csv");
 			boolean newFile = !savedProjects.exists();
 			Writer fileWriter = new FileWriter(savedProjects, true);
+			
+			int serialNum = 1;
 			if (newFile) {
 				System.out.println("test");
-				fileWriter.append("Name|Date|Description\n");
+				fileWriter.append("Name|Date| Description\n");
+			} else {
+				serialNum += commonObjects.readProjectNames("./data/saved-projects.csv").size() - 1;
 			}
 			
 			fileWriter.append(projectName.getText().replaceAll("\\|", "-") + "|" + 
 							datePick.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + 
-							projectDesc.getText().replaceAll("\\|", "-").replaceAll("\n", "\\\\n") + 
+							projectDesc.getText().replaceAll("\\|", "-").replaceAll("\n", "\\\\n") + "|" +
+							serialNum +
 							"\n");
 			fileWriter.flush();
 			fileWriter.close();
