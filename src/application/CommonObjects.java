@@ -53,6 +53,68 @@ public class CommonObjects {
 
         return projectNames;
 	}
+	
+	public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
+        List<String> ticketNames = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] columns = line.split("\\|");
+                if (columns[0].trim().equals(projectId)) {
+                    ticketNames.add(columns[1].trim());
+                }
+            }
+        }
+        return ticketNames;
+    }
+	
+	public static List<List<String>> readProjectNamesAndSerialNumber(String filePath) throws IOException {
+        List<List<String>> resultList = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean isFirstLine = true;
+
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    // Skip the header
+                    isFirstLine = false;
+                    continue;
+                }
+
+                String[] columns = line.split("\\|");
+                String name = columns[0].trim();
+                String serialNumber = columns[columns.length - 1].trim();
+
+                List<String> entry = new ArrayList<>();
+                entry.add(name);
+                entry.add(serialNumber);
+                resultList.add(entry);
+            }
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        return resultList;
+	}
+	
+	public List<String> readTicketNames(String filePath) {
+        List<String> ticketNames = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length >= 1) {
+                    String ticketName = parts[0].replaceAll("-", "|");
+                    ticketNames.add(ticketName);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ticketNames;
+    }
 
 	public void backToMainMenu(ActionEvent event, Stage stage, Scene scene, Parent root) {
 		try {

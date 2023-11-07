@@ -16,46 +16,46 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 
-public class CreateTicketController{
+public class CreateCommentController{
 
 	private CommonObjects commonObjects = CommonObjects.getInstance();
 	@FXML AnchorPane ticketMenuBox;
 	@FXML TextField ticketName;
 	@FXML TextArea ticketDescription;
 	@FXML ChoiceBox<String> projectBox;
+	@FXML ChoiceBox<String> ticketBox;
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	private List<List<String>> projects;
 	
 	@FXML public void initialize() throws IOException {
-		String filePath = "./data/saved-projects.csv"; // Provide the path to your CSV file
-        projects = commonObjects.readProjectNamesAndSerialNumber(filePath);
-        //projects.sort(null);
+		String projectPath = "./data/saved-projects.csv"; // Provide the path to your CSV file
+		String ticketPath = "./data/saved-tickets.csv";
+        List<List<String>> projects = commonObjects.readProjectNamesAndSerialNumber(projectPath);
+        
+        // Display project names in a ListView
         for (int i = 0; i < projects.size(); i++) {
         	projectBox.getItems().add(projects.get(i).get(0) + "," + projects.get(i).get(1));
         }
+        
+        projectBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        	try {
+				updateTicketBox(ticketPath, projectBox.getValue());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        });
 	}
 	
+	private void updateTicketBox(String filePath, String projectId) throws IOException {
+		ticketBox.getItems().clear();
+		List<String> tickets = commonObjects.getTicketNames(filePath, projectId);
+		ticketBox.getItems().addAll(tickets);
+	}
+	
+	
 	@FXML public void confirmButtonPressedOP(ActionEvent event) {
-		try {
-			File savedTickets = new File("./data/saved-tickets.csv");
-			//boolean newFile = !savedTickets.exists();
-			Writer fileWriter = new FileWriter(savedTickets, true);
-			
-			String projectLabel = projectBox.getValue();
-			
-			fileWriter.append(projectLabel + "|" +
-							ticketName.getText().replaceAll("\\|", "-") + "|" +
-							ticketDescription.getText().replaceAll("\\|", "-").replaceAll("\n", "\\\\n") + 
-							"\n");
-			
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		commonObjects.backToMainMenu(event, stage, scene, root);
 	}
 	
