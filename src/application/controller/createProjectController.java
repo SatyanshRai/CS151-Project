@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -25,20 +26,24 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
-public class createProjectController{
+public class createProjectController {
 
 	private CommonObjects commonObjects = CommonObjects.getInstance();
-	@FXML AnchorPane projectMenuBox;
-	
+	@FXML
+	AnchorPane projectMenuBox;
+
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	@FXML private TextField projectName;
-	@FXML private DatePicker datePick;
-	@FXML private TextArea projectDesc;
-	@FXML private Button confirmButton;
-	
+	@FXML
+	private TextField projectName;
+	@FXML
+	private DatePicker datePick;
+	@FXML
+	private TextArea projectDesc;
+	@FXML
+	private Button confirmButton;
+
 	@FXML
 	public void initialize() {
 		datePick.setValue(LocalDate.now());
@@ -49,52 +54,59 @@ public class createProjectController{
 			}
 		});
 	}
-	
-	@FXML 
+
+	@FXML
 	public void backFromCreateProjectOp(ActionEvent event) {
 		try {
 			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	@FXML 
+
+	@FXML
 	public void dateEnteredOp() {
-		
+
 	}
-	
-	@FXML 
+
+	private Connection connection;
+
+	@FXML
 	public void confirmNewProjectOp() {
-		try {
-			File savedProjects = new File("./data/saved-projects.csv");
-			boolean newFile = !savedProjects.exists();
-			Writer fileWriter = new FileWriter(savedProjects, true);
-			
-			int serialNum = 1;
-			if (newFile) {
-				System.out.println("test");
-				fileWriter.append("Name|Date| Description\n");
-			} else {
-				serialNum += commonObjects.readProjectNames("./data/saved-projects.csv").size() - 1;
+		if (connectToDatabase()) {
+			try {
+				// Prepare an SQL INSERT statement
+				String sql = "INSERT INTO Projects (project_name, date, project_desc) VALUES (?, ?, ?)";
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, projectName.getText());
+				preparedStatement.setString(2, datePick.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				preparedStatement.setString(3, projectDesc.getText());
+				preparedStatement.executeUpdate();
+
+				// Close the prepared statement and database connection
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			
-			fileWriter.append(projectName.getText().replaceAll("\\|", "-") + "|" + 
-							datePick.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + 
-							projectDesc.getText().replaceAll("\\|", "-").replaceAll("\n", "\\\\n") + "|" +
-							serialNum +
-							"\n");
-			fileWriter.flush();
-			fileWriter.close();
+		}
+	}
+
+	private boolean connectToDatabase() {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:data/BugDB.db");
+			System.out.println("Database connection established successfully.");
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.err.println("Failed to establish a database connection.");
+			return false;
 		}
 	}
-	
-	
+
 }

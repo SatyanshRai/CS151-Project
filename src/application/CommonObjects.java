@@ -3,6 +3,10 @@ package application;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,26 +20,27 @@ import javafx.stage.Stage;
 
 public class CommonObjects {
 
-	private static CommonObjects commonObjects = new CommonObjects();
-	
-	private HBox mainBox;
-	
-	private CommonObjects()	{}
+    private static CommonObjects commonObjects = new CommonObjects();
 
-	public static CommonObjects getInstance() {
-		return commonObjects;
-	}
+    private HBox mainBox;
 
-	public HBox getMainBox() {
-		return mainBox;
-	}
+    private CommonObjects() {
+    }
 
-	public void setMainBox(HBox mainBox) {
-		this.mainBox = mainBox;
-	}
+    public static CommonObjects getInstance() {
+        return commonObjects;
+    }
 
-	public List<String> readProjectNames(String filePath) {
-		List<String> projectNames = new ArrayList<>();
+    public HBox getMainBox() {
+        return mainBox;
+    }
+
+    public void setMainBox(HBox mainBox) {
+        this.mainBox = mainBox;
+    }
+
+    public List<String> readProjectNames(String filePath) {
+        List<String> projectNames = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -52,9 +57,9 @@ public class CommonObjects {
         }
 
         return projectNames;
-	}
-	
-	public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
+    }
+
+    public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
         List<String> ticketNames = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -67,8 +72,8 @@ public class CommonObjects {
         }
         return ticketNames;
     }
-	
-	public static List<List<String>> readProjectNamesAndSerialNumber(String filePath) throws IOException {
+
+    public static List<List<String>> readProjectNamesAndSerialNumber(String filePath) throws IOException {
         List<List<String>> resultList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -91,12 +96,52 @@ public class CommonObjects {
                 resultList.add(entry);
             }
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
         return resultList;
-	}
-	
-	public List<String> readTicketNames(String filePath) {
+    }
+
+    public List<List<String>> readProjectsFromDatabase() {
+        List<List<String>> projects = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = Main.getConnection(); // Access the database connection from your Main class
+
+            // SQL query to fetch project information
+            String sql = "SELECT project_name, date, project_id FROM Projects";
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String projectName = resultSet.getString("project_name");
+                String date = resultSet.getString("date");
+                String projectId = resultSet.getString("project_id");
+                List<String> projectInfo = new ArrayList<>();
+                projectInfo.add(projectName);
+                projectInfo.add(date);
+                projectInfo.add(projectId);
+                projects.add(projectInfo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+                if (preparedStatement != null)
+                    preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return projects;
+    }
+
+    public List<String> readTicketNames(String filePath) {
         List<String> ticketNames = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -116,17 +161,17 @@ public class CommonObjects {
         return ticketNames;
     }
 
-	public void backToMainMenu(ActionEvent event, Stage stage, Scene scene, Parent root) {
-		try {
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    public void backToMainMenu(ActionEvent event, Stage stage, Scene scene, Parent root) {
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }
