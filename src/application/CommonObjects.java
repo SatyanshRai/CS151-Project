@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -101,8 +100,8 @@ public class CommonObjects {
         return resultList;
     }
 
-    public List<List<String>> readProjectsFromDatabase() {
-        List<List<String>> projects = new ArrayList<>();
+    public List<List<Object>> readProjectsFromDatabase() {
+        List<List<Object>> projects = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -118,8 +117,8 @@ public class CommonObjects {
             while (resultSet.next()) {
                 String projectName = resultSet.getString("project_name");
                 String date = resultSet.getString("date");
-                String projectId = resultSet.getString("project_id");
-                List<String> projectInfo = new ArrayList<>();
+                int projectId = resultSet.getInt("project_id");
+                List<Object> projectInfo = new ArrayList<>();
                 projectInfo.add(projectName);
                 projectInfo.add(date);
                 projectInfo.add(projectId);
