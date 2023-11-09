@@ -1,14 +1,10 @@
-
 package application.controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import application.CommonObjects;
-import javafx.beans.value.ChangeListener;
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,66 +14,107 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class ShowTicketsController {
-    
-	
+
 	private CommonObjects commonObjects = CommonObjects.getInstance();
-	
+
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	@FXML ChoiceBox<String> selectProject;
-	
 	@FXML
-    private ListView<String> ticketListView;
+	private ChoiceBox<String> projectChoiceBox;
+
+	@FXML
+	private ListView<String> ticketListView;
 	String projectPath;
 	String ticketPath;
 
-    public void initialize() throws IOException {
-    	projectPath = "./data/saved-projects.csv";
-        ticketPath = "./data/saved-tickets.csv"; // Provide the path to your CSV file
-        List<List<String>> projects = commonObjects.readProjectNamesAndSerialNumber(projectPath);
+	public void initialize() throws IOException {
+		// Populate the projectChoiceBox with project names from the database
+		List<String> projectNames = readProjectNamesFromDatabase();
+		projectChoiceBox.getItems().addAll(projectNames);
 
-        // Display project names in a ListView
-        for (int i = 0; i < projects.size(); i++) {
-        	selectProject.getItems().add(projects.get(i).get(0) + "," + projects.get(i).get(1));
-        }
-        
-        selectProject.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-        	try {
-				updateDisplay(selectProject.getValue());
-			} catch (IOException e) {
-				e.printStackTrace();
+		// Listen for changes in project selection
+		projectChoiceBox.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if (newValue != null) {
+						List<String> ticketData = readTicketsForProjectFromDatabase(newValue);
+						// Display ticket titles in the ListView
+						ticketListView.getItems().setAll(ticketData);
+					}
+				});
+	}
+
+	public void updateDisplay(String projectId) throws IOException {
+		ticketListView.getItems().clear();
+		List<String> tickets = commonObjects.getTicketNames(ticketPath, projectId);
+		ticketListView.getItems().addAll(tickets);
+	}
+
+	public List<String> readProjectNamesFromDatabase() {
+		List<String> projectNames = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			// Obtain the connection from the Main class
+			connection = Main.getConnection();
+
+			// SQL query to fetch project names
+			String sql = "SELECT project_name FROM Projects";
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				String projectName = resultSet.getString("project_name");
+				projectNames.add(projectName);
 			}
-        });
-    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// Close resources
+		}
 
-    public void updateDisplay(String projectId) throws IOException {
-    	ticketListView.getItems().clear();
-    	List<String> tickets = commonObjects.getTicketNames(ticketPath, projectId);
-    	ticketListView.getItems().addAll(tickets);
-    }
-    
-//    public static List<String> getTicketNames(String filePath, String projectId) throws IOException {
-//        List<String> ticketNames = new ArrayList<>();
-//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                String[] columns = line.split("\\|");
-//                if (columns[0].trim().equals(projectId)) {
-//                    ticketNames.add(columns[1].trim());
-//                }
-//            }
-//        }
-//        return ticketNames;
-//    }
-    
-    @FXML 
+		return projectNames;
+	}
+
+	public List<String> readTicketsForProjectFromDatabase(String selectedProject) {
+		List<String> ticketData = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			// Obtain the connection from the Main class
+			connection = Main.getConnection();
+
+			// SQL query to fetch ticket titles for the selected project
+			String sql = "SELECT ticket_title FROM Tickets WHERE project_id = (SELECT project_id FROM Projects WHERE project_name = ?)";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, selectedProject);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				String ticketTitle = resultSet.getString("ticket_title");
+				ticketData.add(ticketTitle);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// Close resources
+		}
+
+		return ticketData;
+	}
+
+	@FXML
 	public void backFromCreateProjectOp(ActionEvent event) {
 		try {
 			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
