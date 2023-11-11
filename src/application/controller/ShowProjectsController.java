@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import application.CommonObjects;
 import application.Main; // Import the Main class
@@ -18,6 +20,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class ShowProjectsController {
 
@@ -28,6 +32,8 @@ public class ShowProjectsController {
 
     @FXML
     private ListView<String> projectListView;
+	@FXML TextField searchBar;
+	@FXML AnchorPane projectMenuBox;
 
     public void initialize() {
         List<String> projectData = readProjectDataFromDatabase();
@@ -84,4 +90,9 @@ public class ShowProjectsController {
             e.printStackTrace();
         }
     }
+
+	@FXML public void searchButtonOP(ActionEvent event) {
+		projectListView.getItems().clear();
+		projectListView.getItems().addAll(commonObjects.searchList(searchBar.getText(), readProjectDataFromDatabase()));
+	}
 }

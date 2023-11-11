@@ -4,13 +4,14 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowTicketsController">
    <children>
       <Button layoutX="31.0" layoutY="752.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="#f70000" />
-      <ListView fx:id="ticketListView" layoutX="215.0" layoutY="149.0" prefHeight="568.0" prefWidth="389.0" />
+      <ListView fx:id="ticketListView" layoutX="214.0" layoutY="201.0" prefHeight="547.0" prefWidth="389.0" />
       <Label layoutX="339.0" layoutY="36.0" text="Tickets" textAlignment="CENTER" textFill="#0095ff">
          <font>
             <Font size="40.0" />
@@ -22,5 +23,7 @@
          </font>
       </Label>
       <ChoiceBox fx:id="projectChoiceBox" layoutX="427.0" layoutY="102.0" prefWidth="150.0" />
+      <TextField fx:id="searchBar" layoutX="234.0" layoutY="163.0" prefHeight="28.0" prefWidth="244.0" />
+      <Button layoutX="506.0" layoutY="160.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="34.0" prefWidth="56.0" text="Search" />
    </children>
 </AnchorPane>
