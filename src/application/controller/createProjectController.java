@@ -50,7 +50,7 @@ public class createProjectController {
 		confirmButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				confirmNewProjectOp();
+				confirmNewProjectOp(event);
 			}
 		});
 	}
@@ -76,7 +76,8 @@ public class createProjectController {
 	private Connection connection;
 
 	@FXML
-	public void confirmNewProjectOp() {
+	public void confirmNewProjectOp(ActionEvent event) {
+		commonObjects.backToMainMenu(event, stage, scene, root);
 		if (connectToDatabase()) {
 			try {
 				// Prepare an SQL INSERT statement

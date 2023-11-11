@@ -3,17 +3,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowProjectsController">
+<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowProjectsController">
    <children>
       <Button layoutX="31.0" layoutY="752.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="#f70000" />
-      <ListView fx:id="projectListView" layoutX="215.0" layoutY="108.0" prefHeight="609.0" prefWidth="389.0" />
+      <ListView fx:id="projectListView" layoutX="215.0" layoutY="150.0" prefHeight="567.0" prefWidth="389.0" />
       <Label layoutX="317.0" layoutY="34.0" text="All Projects" textFill="#0095ff">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
+      <TextField fx:id="searchBar" layoutX="152.0" layoutY="103.0" prefHeight="34.0" prefWidth="418.0" />
+      <Button layoutX="584.0" layoutY="103.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="32.0" prefWidth="66.0" text="Search" />
    </children>
 </AnchorPane>
