@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import java.util.stream.Collectors;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -103,6 +105,26 @@ public class CommonObjects {
         return resultList;
     }
 
+    public List<String> readTicketNames(String filePath) {
+        List<String> ticketNames = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length >= 1) {
+                    String ticketName = parts[0].replaceAll("-", "|");
+                    ticketNames.add(ticketName);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ticketNames;
+    }
+
     public List<List<Object>> readProjectsFromDatabase() {
         List<List<Object>> projects = new ArrayList<>();
         Connection connection = null;
@@ -141,26 +163,6 @@ public class CommonObjects {
         }
 
         return projects;
-    }
-
-    public List<String> readTicketNames(String filePath) {
-        List<String> ticketNames = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                if (parts.length >= 1) {
-                    String ticketName = parts[0].replaceAll("-", "|");
-                    ticketNames.add(ticketName);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return ticketNames;
     }
 
     public void backToMainMenu(ActionEvent event, Stage stage, Scene scene, Parent root) {
