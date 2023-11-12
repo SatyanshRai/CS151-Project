@@ -15,6 +15,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import java.sql.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
 public class ShowTicketsController {
 
@@ -30,6 +33,10 @@ public class ShowTicketsController {
 	private ListView<String> ticketListView;
 	String projectPath;
 	String ticketPath;
+
+	@FXML TextField searchBar;
+
+	@FXML AnchorPane projectMenuBox;
 
 	public void initialize() throws IOException {
 		// Populate the projectChoiceBox with project names from the database
@@ -122,5 +129,10 @@ public class ShowTicketsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@FXML public void searchButtonOP() {
+		ticketListView.getItems().clear();
+		ticketListView.getItems().addAll(commonObjects.searchList(searchBar.getText(), readTicketsForProjectFromDatabase(projectChoiceBox.getSelectionModel().getSelectedItem())));
 	}
 }

@@ -8,7 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import java.util.stream.Collectors;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -173,5 +177,14 @@ public class CommonObjects {
             e.printStackTrace();
         }
     }
+    
+    public List<String> searchList(String searchWords, List<String> listOfStrings) {
+		List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
+		
+		return listOfStrings.stream().filter(input -> {
+			return searchWordsArray.stream().allMatch(word ->
+					input.toLowerCase().contains(word.toLowerCase()));
+		}).collect(Collectors.toList());
+	}
 
 }
