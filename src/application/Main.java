@@ -15,15 +15,14 @@ public class Main extends Application {
 	private static Connection connection;
 
 	public static Connection getConnection() {
-		if (connection == null) {
-			try {
-				Class.forName("org.sqlite.JDBC");
-				connection = DriverManager.getConnection("jdbc:sqlite:data/BugDB.db");
-				System.out.println("Database connection established successfully.");
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.err.println("Failed to establish a database connection.");
-			}
+		Connection connection = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:data/BugDB.db");
+			System.out.println("Database connection established successfully.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Failed to establish a database connection.");
 		}
 		return connection;
 	}
