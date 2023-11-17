@@ -1,6 +1,7 @@
 package application.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -43,35 +44,41 @@ public class CreateTicketController {
 
 	@FXML
 	public void confirmButtonPressedOP(ActionEvent event) {
-		Connection connection = Main.getConnection(); // Access the database connection from Main
+		if(ticketName.getText().equals("") || projectBox.getSelectionModel().selectedItemProperty() == null) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setHeaderText("Enter Required Information!");
+		    alert.showAndWait();
+		} else {
+			Connection connection = Main.getConnection(); // Access the database connection from Main
 
-		if (connection != null) {
-			try {
-				String ticketNameText = ticketName.getText();
-				String ticketDescriptionText = ticketDescription.getText();
+			if (connection != null) {
+				try {
+					String ticketNameText = ticketName.getText();
+					String ticketDescriptionText = ticketDescription.getText();
 
-				// Prepare an SQL INSERT statement for the Tickets table
-				String sql = "INSERT INTO Tickets (project_id, ticket_title, ticket_desc) VALUES (?, ?, ?)";
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+					// Prepare an SQL INSERT statement for the Tickets table
+					String sql = "INSERT INTO Tickets (project_id, ticket_title, ticket_desc) VALUES (?, ?, ?)";
+					PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-				// Extract project_id from the ChoiceBox selection
-				int projectIndex = projectBox.getSelectionModel().getSelectedIndex();
-				int projectID = (int) projects.get(projectIndex).get(2); // Corrected data type
+					// Extract project_id from the ChoiceBox selection
+					int projectIndex = projectBox.getSelectionModel().getSelectedIndex();
+					int projectID = (int) projects.get(projectIndex).get(2); // Corrected data type
 
-				preparedStatement.setInt(1, projectID);
-				preparedStatement.setString(2, ticketNameText);
-				preparedStatement.setString(3, ticketDescriptionText);
+					preparedStatement.setInt(1, projectID);
+					preparedStatement.setString(2, ticketNameText);
+					preparedStatement.setString(3, ticketDescriptionText);
 
-				// Execute the INSERT statement
-				preparedStatement.executeUpdate();
+					// Execute the INSERT statement
+					preparedStatement.executeUpdate();
 
-				// Close the prepared statement
-				preparedStatement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+					// Close the prepared statement
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				commonObjects.backToMainMenu(event, stage, scene, root);
 			}
-
-			commonObjects.backToMainMenu(event, stage, scene, root);
 		}
 	}
 
