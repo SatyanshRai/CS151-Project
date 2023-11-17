@@ -6,42 +6,49 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.createProjectController">
+<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.createProjectController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="236.0" layoutY="39.0" text="Create A New Project" textFill="#0095ff">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutX="-2.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="803.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="238.0" layoutY="115.0" text="Create A New Project" textFill="#0095ff">
          <font>
             <Font name="Arial" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="113.0" text="Project Name *">
+      <Label layoutX="38.0" layoutY="165.0" text="Project Name *">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="projectName" layoutX="46.0" layoutY="158.0" promptText="required">
+      <TextField fx:id="projectName" layoutX="44.0" layoutY="210.0" promptText="required">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <Label alignment="TOP_LEFT" layoutX="44.0" layoutY="231.0" text="Start Date">
+      <Label alignment="TOP_LEFT" layoutX="42.0" layoutY="283.0" text="Start Date">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePick" editable="false" layoutX="50.0" layoutY="273.0" onAction="#dateEnteredOp" prefHeight="40.0" prefWidth="283.0" promptText="" />
-      <Label alignment="TOP_LEFT" layoutX="48.0" layoutY="358.0" text="Project Description">
+      <DatePicker fx:id="datePick" editable="false" layoutX="48.0" layoutY="325.0" onAction="#dateEnteredOp" prefHeight="40.0" prefWidth="283.0" promptText="" />
+      <Label alignment="TOP_LEFT" layoutX="46.0" layoutY="410.0" text="Project Description">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextArea fx:id="projectDesc" layoutX="53.0" layoutY="411.0" prefHeight="185.0" prefWidth="675.0" />
-      <Button layoutX="31.0" layoutY="752.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="RED" />
+      <TextArea fx:id="projectDesc" layoutX="51.0" layoutY="463.0" prefHeight="185.0" prefWidth="675.0" />
+      <Button layoutX="705.0" layoutY="34.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="RED" />
       <Button fx:id="confirmButton" layoutX="267.0" layoutY="693.0" mnemonicParsing="false" onAction="#confirmNewProjectOp" prefHeight="45.0" prefWidth="224.0" text="Confirm" textFill="#13bc00">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
+      <Label contentDisplay="CENTER" layoutX="12.0" layoutY="2.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
+         <font>
+            <Font name="Baloo Da 2 ExtraBold" size="50.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

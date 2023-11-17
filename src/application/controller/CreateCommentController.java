@@ -76,18 +76,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import application.CommonObjects;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.control.DatePicker;
 
 public class CreateCommentController {
 
@@ -95,8 +101,6 @@ public class CreateCommentController {
 
 	@FXML
 	AnchorPane ticketMenuBox;
-	@FXML
-	TextField date; // Assuming 'date' is used for comment date
 	@FXML
 	TextArea commentDescription;
 	@FXML
@@ -106,9 +110,12 @@ public class CreateCommentController {
 	private Stage stage;
 	private List<List<Object>> projects;
 
+	@FXML DatePicker date;	 // Assuming 'date' is used for comment date
+
 	@FXML
 	public void initialize() throws IOException {
 		// Populate projectBox with project names from the database
+		date.setValue(LocalDate.now());
 		projects = commonObjects.readProjectsFromDatabase();
 		for (List<Object> project : projects) {
 			String projectName = (String) project.get(0);
@@ -184,8 +191,16 @@ public class CreateCommentController {
 	@FXML
 	public void confirmButtonPressedOP(ActionEvent event) {
 		// Assuming you want to save the comment to the database
-		saveCommentToDatabase();
-		commonObjects.backToMainMenu(event, stage, null, null);
+		if(ticketBox.getSelectionModel().selectedItemProperty() == null || 
+				projectBox.getSelectionModel().selectedItemProperty() == null ||
+				commentDescription.getText().equals("")) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setHeaderText("Enter Required Information!");
+		    alert.showAndWait();			
+		} else {
+			saveCommentToDatabase();
+			commonObjects.backToMainMenu(event, stage, null, null);
+		}
 	}
 
 	private void saveCommentToDatabase() {
@@ -193,6 +208,8 @@ public class CreateCommentController {
 		PreparedStatement preparedStatement = null;
 
 		try {
+			String currDate = date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
 			// Obtain the connection from the Main class or your database utility class
 			connection = Main.getConnection();
 
@@ -214,7 +231,7 @@ public class CreateCommentController {
 
 			preparedStatement.setInt(1, selectedTicketId);
 			preparedStatement.setString(2, commentDescription.getText());
-			preparedStatement.setString(3, date.getText());
+			preparedStatement.setString(3, currDate);
 
 			// Execute the update
 			preparedStatement.executeUpdate();

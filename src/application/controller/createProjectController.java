@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -77,22 +78,28 @@ public class createProjectController {
 
 	@FXML
 	public void confirmNewProjectOp(ActionEvent event) {
-		commonObjects.backToMainMenu(event, stage, scene, root);
-		if (connectToDatabase()) {
-			try {
-				// Prepare an SQL INSERT statement
-				String sql = "INSERT INTO Projects (project_name, date, project_desc) VALUES (?, ?, ?)";
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, projectName.getText());
-				preparedStatement.setString(2, datePick.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				preparedStatement.setString(3, projectDesc.getText());
-				preparedStatement.executeUpdate();
-
-				// Close the prepared statement and database connection
-				preparedStatement.close();
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+		if(projectName.getText().equals("")) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setHeaderText("Enter Required Information!");
+		    alert.showAndWait();
+		} else {
+			commonObjects.backToMainMenu(event, stage, scene, root);
+			if (connectToDatabase()) {
+				try {
+					// Prepare an SQL INSERT statement
+					String sql = "INSERT INTO Projects (project_name, date, project_desc) VALUES (?, ?, ?)";
+					PreparedStatement preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, projectName.getText());
+					preparedStatement.setString(2, datePick.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+					preparedStatement.setString(3, projectDesc.getText());
+					preparedStatement.executeUpdate();
+					
+					// Close the prepared statement and database connection
+					preparedStatement.close();
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
