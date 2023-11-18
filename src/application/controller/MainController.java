@@ -35,7 +35,7 @@ public class MainController {
 
 	@FXML
 	public void showProjectsOp() {
-		URL url = getClass().getClassLoader().getResource("view/ShowProjects.fxml");
+		URL url = getClass().getClassLoader().getResource("view/ShowProjectsTable.fxml");
 
 		try {
 			AnchorPane pane1 = (AnchorPane) FXMLLoader.load(url);

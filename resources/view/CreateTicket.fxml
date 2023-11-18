@@ -9,42 +9,42 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ticketMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CreateTicketController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutX="-8.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="809.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="235.0" layoutY="122.0" text="Create A New Ticket" textFill="#0095ff">
-         <font>
-            <Font name="Arial" size="36.0" />
-         </font>
-      </Label>
-      <Button layoutX="722.0" layoutY="35.0" mnemonicParsing="false" onAction="#backButtonPressedOP" text="Back" textFill="RED" />
-      <Label layoutX="27.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" text="Select Project Under *">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="ticketName" layoutX="28.0" layoutY="290.0" prefHeight="35.0" prefWidth="241.0" />
-      <Label layoutX="30.0" layoutY="261.0" prefHeight="26.0" prefWidth="182.0" text="Enter Ticket Name *">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="ticketDescription" layoutX="29.0" layoutY="379.0" prefHeight="200.0" prefWidth="590.0" />
-      <Label layoutX="26.0" layoutY="349.0" prefHeight="26.0" prefWidth="213.0" text="Enter Ticket Description">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="322.0" layoutY="689.0" mnemonicParsing="false" onAction="#confirmButtonPressedOP" prefHeight="51.0" prefWidth="177.0" text="Confirm" textFill="#58ab4e">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <ChoiceBox fx:id="projectBox" layoutX="26.0" layoutY="214.0" prefHeight="26.0" prefWidth="182.0" />
-      <Label contentDisplay="CENTER" layoutX="6.0" layoutY="2.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
-         <font>
-            <Font name="Baloo Da 2 ExtraBold" size="50.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane fx:id="ticketMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CreateTicketController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutX="-2.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+        <Label contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="2.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
+            <font>
+                <Font name="Baloo Da 2 ExtraBold" size="50.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="40.0" layoutY="122.0" text="Create A New Ticket" textFill="#0095ff">
+            <font>
+                <Font name="Arial" size="36.0" />
+            </font>
+        </Label>
+        <Label layoutX="40.0" layoutY="190.0" text="Select Project Under *">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <ChoiceBox fx:id="projectBox" layoutX="40.0" layoutY="220.0" prefHeight="40.0" prefWidth="300.0" />
+        <Label alignment="CENTER" layoutX="40.0" layoutY="270.0" text="Enter Ticket Name *">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="ticketName" layoutX="40.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" />
+        <Label alignment="CENTER" layoutX="40.0" layoutY="350.0" text="Enter Ticket Description">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextArea fx:id="ticketDescription" layoutX="40.0" layoutY="380.0" prefHeight="200.0" prefWidth="600.0" />
+        <Button layoutX="40.0" layoutY="700.0" mnemonicParsing="false" onAction="#confirmButtonPressedOP" prefHeight="45.0" prefWidth="224.0" text="Confirm" textFill="#13bc00">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+        <Button layoutX="1100.0" layoutY="35.0" mnemonicParsing="false" onAction="#backButtonPressedOP" text="Back" textFill="RED" />
+    </children>
 </AnchorPane>
