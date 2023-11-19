@@ -70,6 +70,26 @@ public class MainController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	public void showCommentsOp() {
+		URL url = getClass().getClassLoader().getResource("view/ShowComments.fxml");
+
+		try {
+			AnchorPane pane1 = (AnchorPane) FXMLLoader.load(url);
+
+			if (mainBox.getChildren().size() > 0)
+				mainBox.getChildren().remove(0);
+
+			mainBox.getChildren().add(pane1);
+		}
+
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	@FXML
 	public void createTicketOP() {
