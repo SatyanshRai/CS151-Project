@@ -11,10 +11,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowCommentsController">
+<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowCommentsController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="104.0" stroke="BLACK" strokeType="INSIDE" width="805.0" />
-      <Button layoutX="707.0" layoutY="40.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="#f70000" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="104.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+      <Button layoutX="1130.0" layoutY="39.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="#f70000" />
       <Label layoutX="312.0" layoutY="119.0" text="Comments" textAlignment="CENTER" textFill="#0095ff">
          <font>
             <Font size="40.0" />

@@ -7,16 +7,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="mainBox" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
+<HBox fx:id="mainBox" prefHeight="1200.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
    <children>
-      <AnchorPane prefHeight="800.0" prefWidth="800.0">
+      <AnchorPane prefHeight="1200.0" prefWidth="1200.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="482.0" layoutY="40.0" mnemonicParsing="false" onAction="#createProjectOp" prefHeight="22.0" prefWidth="90.0" text="Create Project" textFill="#0095ff">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1210.0" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="882.0" layoutY="40.0" mnemonicParsing="false" onAction="#createProjectOp" prefHeight="22.0" prefWidth="90.0" text="Create Project" textFill="#0095ff">
                <font>
                   <Font size="12.0" />
                </font></Button>
-            <Label contentDisplay="CENTER" layoutX="14.0" layoutY="5.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
+            <Label contentDisplay="CENTER" layoutX="10.0" layoutY="2.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
                <font>
                   <Font name="Baloo Da 2 ExtraBold" size="50.0" />
                </font>
@@ -25,16 +25,21 @@
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button layoutX="583.0" layoutY="40.0" mnemonicParsing="false" onAction="#createTicketOP" prefHeight="10.0" prefWidth="90.0" text="Create Ticket" textFill="#0095ff">
+            <Button layoutX="983.0" layoutY="40.0" mnemonicParsing="false" onAction="#createTicketOP" prefHeight="10.0" prefWidth="90.0" text="Create Ticket" textFill="#0095ff">
                <font>
                   <Font size="12.0" />
                </font></Button>
-            <Button layoutX="683.0" layoutY="40.0" mnemonicParsing="false" onAction="#createCommentOP" prefHeight="23.0" prefWidth="103.0" text="Create Comment" textFill="#0095ff">
+            <Button layoutX="1083.0" layoutY="40.0" mnemonicParsing="false" onAction="#createCommentOP" prefHeight="23.0" prefWidth="103.0" text="Create Comment" textFill="#0095ff">
                <font>
                   <Font size="12.0" />
                </font>
             </Button>
             <Button alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="222.0" mnemonicParsing="false" onAction="#showTicketsOp" prefHeight="40.0" prefWidth="180.0" text="Show Tickets" textFill="#0095ff">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="286.0" mnemonicParsing="false" onAction="#showCommentsOp" prefHeight="40.0" prefWidth="180.0" text="Show Comments" textFill="#0095ff">
                <font>
                   <Font size="20.0" />
                </font>

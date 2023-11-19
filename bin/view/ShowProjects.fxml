@@ -9,21 +9,21 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowProjectsController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutX="-6.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="807.0" />
-      <Button layoutX="711.0" layoutY="37.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="#f70000" />
-      <ListView fx:id="projectListView" layoutX="217.0" layoutY="248.0" prefHeight="508.0" prefWidth="389.0" />
-      <Label layoutX="319.0" layoutY="132.0" text="All Projects" textFill="#0095ff">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <TextField fx:id="searchBar" layoutX="154.0" layoutY="201.0" prefHeight="34.0" prefWidth="418.0" />
-      <Button layoutX="586.0" layoutY="201.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="32.0" prefWidth="66.0" text="Search" />
-      <Label contentDisplay="CENTER" layoutX="8.0" layoutY="4.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
-         <font>
-            <Font name="Baloo Da 2 ExtraBold" size="50.0" />
-         </font>
-      </Label>
-   </children>
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutX="-2.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+        <Label contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="2.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
+            <font>
+                <Font name="Baloo Da 2 ExtraBold" size="50.0" />
+            </font>
+        </Label>
+        <Button layoutX="1100.0" layoutY="35.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="RED" />
+        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="40.0" layoutY="122.0" text="All Projects" textAlignment="JUSTIFY" textFill="#0095ff">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </Label>
+        <TextField fx:id="searchBar" layoutX="154.0" layoutY="201.0" prefHeight="34.0" prefWidth="418.0" />
+        <Button layoutX="586.0" layoutY="201.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="32.0" prefWidth="66.0" text="Search" />
+        <ListView fx:id="projectListView" layoutX="217.0" layoutY="248.0" prefHeight="508.0" prefWidth="389.0" />
+    </children>
 </AnchorPane>

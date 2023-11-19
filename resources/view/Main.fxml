@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="1200.0" prefWidth="1200.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutX="-2.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1210.0" />
             <Button alignment="CENTER" contentDisplay="CENTER" layoutX="882.0" layoutY="40.0" mnemonicParsing="false" onAction="#createProjectOp" prefHeight="22.0" prefWidth="90.0" text="Create Project" textFill="#0095ff">
                <font>
                   <Font size="12.0" />
