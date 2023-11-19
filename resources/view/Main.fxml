@@ -39,6 +39,11 @@
                   <Font size="20.0" />
                </font>
             </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="286.0" mnemonicParsing="false" onAction="#showCommentsOp" prefHeight="40.0" prefWidth="180.0" text="Show Comments" textFill="#0095ff">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
