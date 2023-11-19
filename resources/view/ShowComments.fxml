@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -24,10 +25,10 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="projectChoiceBox" layoutX="408.0" layoutY="181.0" prefWidth="150.0" />
-      <TextField fx:id="searchBar" layoutX="239.0" layoutY="288.0" prefHeight="28.0" prefWidth="244.0" />
-      <Button layoutX="512.0" layoutY="285.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="34.0" prefWidth="56.0" text="Search" />
-      <TableView fx:id="ticketTableView" layoutX="133.0" layoutY="334.0" prefHeight="401.0" prefWidth="539.0">
+      <ChoiceBox fx:id="projectChoiceBox" layoutX="406.0" layoutY="181.0" prefWidth="150.0" />
+      <TextField fx:id="searchBar" layoutX="237.0" layoutY="257.0" prefHeight="28.0" prefWidth="244.0" />
+      <Button layoutX="511.0" layoutY="254.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="34.0" prefWidth="56.0" text="Search" />
+      <TableView fx:id="commentTableView" layoutX="139.0" layoutY="301.0" prefHeight="314.0" prefWidth="539.0">
         <columns>
           <TableColumn fx:id="commentCol" prefWidth="179.5" text="Comment" />
           <TableColumn fx:id="ticketCol" prefWidth="179.5" text="Ticket" />
@@ -39,11 +40,12 @@
             <Font name="Baloo Da 2 ExtraBold" size="50.0" />
          </font>
       </Label>
-      <Label layoutX="251.0" layoutY="219.0" prefHeight="50.0" prefWidth="123.0" text="Select Ticket">
+      <Label layoutX="249.0" layoutY="207.0" prefHeight="50.0" prefWidth="123.0" text="Select Ticket">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="ticketChoiceBox" layoutX="408.0" layoutY="231.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="ticketChoiceBox" layoutX="406.0" layoutY="219.0" prefWidth="150.0" />
+      <TextArea fx:id="commentDescDisplay" layoutX="85.0" layoutY="640.0" prefHeight="121.0" prefWidth="647.0" />
    </children>
 </AnchorPane>

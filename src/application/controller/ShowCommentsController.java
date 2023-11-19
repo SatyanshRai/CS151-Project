@@ -18,6 +18,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import java.sql.*;
 import javafx.scene.control.TextField;
@@ -37,7 +38,7 @@ public class ShowCommentsController {
 	@FXML private ChoiceBox<String> ticketChoiceBox;
 
 	@FXML
-	private TableView<Comment> ticketTableView;
+	private TableView<Comment> commentTableView;
 	private ObservableList<Comment> tableData = FXCollections.observableArrayList();
 	
 	@FXML private TableColumn ticketCol;
@@ -50,6 +51,8 @@ public class ShowCommentsController {
 	List<String> allProjectNames;
 	List<String> allTicketNames;
 	List<Comment> allComments;
+	
+	@FXML TextArea commentDescDisplay;
 
 	@FXML TextField searchBar;
 
@@ -67,7 +70,7 @@ public class ShowCommentsController {
 		ticketChoiceBox.getItems().add("N/A");
 		ticketChoiceBox.getSelectionModel().selectFirst();
 		
-		ticketTableView.setItems(tableData);
+		commentTableView.setItems(tableData);
 		ticketCol.setCellValueFactory(new PropertyValueFactory<>("ticketName"));
 		projectCol.setCellValueFactory(new PropertyValueFactory<>("projectName"));
 		commentCol.setCellValueFactory(new PropertyValueFactory<>("commentDescription"));
@@ -98,6 +101,11 @@ public class ShowCommentsController {
 					} else if (newValue != null) {
 						tableData.addAll(getCommentsUnderTicketAndProject(newValue, selectedProject));
 					}
+				});
+		
+		commentTableView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					commentDescDisplay.setText(newValue.getCommentDescription());
 				});
 		
 		displayAllComments();	
