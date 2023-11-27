@@ -46,6 +46,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="ticketChoiceBox" layoutX="406.0" layoutY="219.0" prefWidth="150.0" />
-      <TextArea fx:id="commentDescDisplay" layoutX="85.0" layoutY="640.0" prefHeight="121.0" prefWidth="647.0" />
+      <TextArea fx:id="commentDescDisplay" layoutX="85.0" layoutY="640.0" prefHeight="121.0" prefWidth="647.0" wrapText="true" />
    </children>
 </AnchorPane>
