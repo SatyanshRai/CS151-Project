@@ -91,19 +91,7 @@ public class ShowProjectsTableController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            conn = Main.getConnection();
-            rs = conn.createStatement().executeQuery("SELECT project_name, date, project_desc FROM Projects");
-
-            while (rs.next()) {
-                listI.add(new ProjectsItems(rs.getString("project_name"), rs.getString("date"),
-                        rs.getString("project_desc")));
-
-            }
-            colProjectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
-            colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-            colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-
-            tbProjects.setItems(listI);
+            repopulate();
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -154,10 +142,34 @@ public class ShowProjectsTableController implements Initializable {
 
                 tbProjects.getItems().remove(index);
                 clearFields();
+                
+                listI.clear();
+                repopulate();
+                searchButtonOP(event);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+    }
+    
+    private void repopulate() {
+    	try {
+    		conn = Main.getConnection();
+            rs = conn.createStatement().executeQuery("SELECT project_name, date, project_desc FROM Projects");
+
+            while (rs.next()) {
+                listI.add(new ProjectsItems(rs.getString("project_name"), rs.getString("date"),
+                        rs.getString("project_desc")));
+
+            }
+            colProjectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+            colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+            colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+            tbProjects.setItems(listI);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 
     @FXML
@@ -167,7 +179,9 @@ public class ShowProjectsTableController implements Initializable {
         if (index >= 0) {
             try {
                 String projectName = txtProjectName.getText();
-                String date = txtDate.getValue().toString();
+                String date;
+                if(txtDate.getValue() == null) date = colDate.getCellData(index).toString();
+                else date = txtDate.getValue().toString();
                 String description = txtDescription.getText();
 
                 String updateQuery = "UPDATE Projects SET project_name=?, date=?, project_desc=? WHERE project_name=?";
