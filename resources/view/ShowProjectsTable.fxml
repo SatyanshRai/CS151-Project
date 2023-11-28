@@ -45,7 +45,7 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <DatePicker fx:id="txtDate" disable="false" editable="true" layoutX="24.0" layoutY="175.0" prefHeight="40.0" prefWidth="300.0" />
+            <DatePicker fx:id="txtDate" editable="false" layoutX="24.0" layoutY="175.0" prefHeight="40.0" prefWidth="300.0" />
             <Text layoutX="29.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                <font>
                   <Font size="20.0" />
@@ -66,7 +66,7 @@
       </AnchorPane>
       <AnchorPane layoutX="491.0" layoutY="255.0" prefHeight="593.0" prefWidth="677.0" style="-fx-border-color: #0095ff; -fx-border-width: 2;">
          <children>
-            <TableView fx:id="tbProjects" layoutX="23.0" layoutY="26.0" onMouseClicked="#getitem" prefHeight="527.0" prefWidth="630.0">
+            <TableView fx:id="tbProjects" layoutX="23.0" layoutY="19.0" onMouseClicked="#getitem" prefHeight="561.0" prefWidth="630.0">
               <columns>
                 <TableColumn fx:id="colProjectName" prefWidth="221.0" text="Project Name" />
                 <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="108.0" text="Date" />
