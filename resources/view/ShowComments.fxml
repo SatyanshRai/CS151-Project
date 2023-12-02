@@ -28,11 +28,12 @@
       <ChoiceBox fx:id="projectChoiceBox" layoutX="406.0" layoutY="181.0" prefWidth="150.0" />
       <TextField fx:id="searchBar" layoutX="237.0" layoutY="257.0" prefHeight="28.0" prefWidth="244.0" />
       <Button layoutX="511.0" layoutY="254.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="34.0" prefWidth="56.0" text="Search" />
-      <TableView fx:id="commentTableView" layoutX="139.0" layoutY="301.0" prefHeight="314.0" prefWidth="539.0">
+      <TableView fx:id="commentTableView" layoutX="35.0" layoutY="308.0" onMouseClicked="#getItem" prefHeight="314.0" prefWidth="788.0">
         <columns>
-          <TableColumn fx:id="commentCol" prefWidth="179.5" text="Comment" />
-          <TableColumn fx:id="ticketCol" prefWidth="179.5" text="Ticket" />
-          <TableColumn fx:id="projectCol" prefWidth="179.5" text="Project" />
+          <TableColumn fx:id="commentCol" prefWidth="252.5" text="Comment" />
+          <TableColumn fx:id="ticketCol" prefWidth="178.5" text="Ticket" />
+          <TableColumn fx:id="projectCol" prefWidth="188.5" text="Project" />
+            <TableColumn fx:id="dateCol" prefWidth="167.5" text="Date" />
         </columns>
       </TableView>
       <Label contentDisplay="CENTER" layoutX="7.0" layoutY="6.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
@@ -47,5 +48,7 @@
       </Label>
       <ChoiceBox fx:id="ticketChoiceBox" layoutX="406.0" layoutY="219.0" prefWidth="150.0" />
       <TextArea fx:id="commentDescDisplay" layoutX="85.0" layoutY="640.0" prefHeight="121.0" prefWidth="647.0" wrapText="true" />
+      <Button layoutX="761.0" layoutY="712.0" mnemonicParsing="false" onAction="#saveChangesOP" prefHeight="26.0" prefWidth="84.0" text="Save" />
+      <Button layoutX="761.0" layoutY="672.0" mnemonicParsing="false" onAction="#deleteCommentOP" prefHeight="26.0" prefWidth="84.0" text="Delete" />
    </children>
 </AnchorPane>
