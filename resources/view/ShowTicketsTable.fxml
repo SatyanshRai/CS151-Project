@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowProjectsTableController">
+<AnchorPane fx:id="projectMenuBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ShowTicketsTableController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="101.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1210.0" />
         <Label contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="2.0" text="Bug Guard" textAlignment="CENTER" textFill="#0095ff">
@@ -21,7 +21,7 @@
             </font>
         </Label>
         <Button layoutX="1100.0" layoutY="35.0" mnemonicParsing="false" onAction="#backFromCreateProjectOp" text="Back" textFill="RED" />
-        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="40.0" layoutY="122.0" text="All Projects" textAlignment="JUSTIFY" textFill="#0095ff">
+        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="40.0" layoutY="122.0" text="All Tickets" textAlignment="JUSTIFY" textFill="#0095ff">
             <font>
                 <Font size="40.0" />
             </font>
@@ -30,22 +30,21 @@
         <Button layoutX="458.0" layoutY="185.0" mnemonicParsing="false" onAction="#searchButtonOP" prefHeight="32.0" prefWidth="66.0" text="Search" />
       <AnchorPane layoutX="40.0" layoutY="255.0" prefHeight="594.0" prefWidth="440.0" style="-fx-border-color: #0095ff; -fx-border-width: 2;">
          <children>
-            <Text layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Name">
+            <Text layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Name">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <TextField fx:id="txtProjectName" layoutX="24.0" layoutY="53.0" prefHeight="40.0" prefWidth="300.0">
+            <TextField fx:id="txtTicketName" layoutX="24.0" layoutY="53.0" prefHeight="40.0" prefWidth="300.0">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Text layoutX="24.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+            <Text layoutX="24.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Name">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <DatePicker fx:id="txtDate" editable="false" layoutX="24.0" layoutY="175.0" prefHeight="40.0" prefWidth="300.0" />
             <Text layoutX="29.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                <font>
                   <Font size="20.0" />
@@ -57,23 +56,34 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="DeleteProject" layoutX="245.0" layoutY="532.0" mnemonicParsing="false" onAction="#deleteProject" prefHeight="40.0" prefWidth="155.0" text="Delete">
+            <Button fx:id="DeleteTicket" layoutX="245.0" layoutY="532.0" mnemonicParsing="false" onAction="#deleteProject" prefHeight="40.0" prefWidth="155.0" text="Delete">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
+            <TextField fx:id="txtProjectName" layoutX="25.0" layoutY="171.0" prefHeight="40.0" prefWidth="300.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="491.0" layoutY="255.0" prefHeight="593.0" prefWidth="677.0" style="-fx-border-color: #0095ff; -fx-border-width: 2;">
+      <AnchorPane layoutX="491.0" layoutY="255.0" prefHeight="595.0" prefWidth="677.0" style="-fx-border-color: #0095ff; -fx-border-width: 2;">
          <children>
-            <TableView fx:id="tbProjects" layoutX="23.0" layoutY="19.0" onMouseClicked="#getitem" prefHeight="561.0" prefWidth="630.0">
-              <columns>
-                <TableColumn fx:id="colProjectName" prefWidth="221.0" text="Project Name" />
-                <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="108.0" text="Date" />
-                  <TableColumn fx:id="colDescription" prefWidth="300.0" text="Description" />
-              </columns>
+            <TableView fx:id="ticketTableView" layoutX="11.0" layoutY="10.0" prefHeight="574.0" prefWidth="653.0">
+               <columns>
+                  <TableColumn fx:id="ticketCol" prefWidth="167.36279296875" text="Ticket" />
+                  <TableColumn fx:id="projectCol" prefWidth="151.05145263671875" text="Project" />
+                  <TableColumn fx:id="descCol" prefWidth="332.0" text="Description" />
+               </columns>
             </TableView>
          </children>
       </AnchorPane>
+      <ChoiceBox fx:id="projectChoiceBox" layoutX="907.0" layoutY="188.0" prefWidth="150.0" />
+      <Label layoutX="740.0" layoutY="175.0" prefHeight="50.0" prefWidth="123.0" text="Select Project">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
