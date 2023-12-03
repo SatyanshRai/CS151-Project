@@ -2,16 +2,35 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
-public class MainController {
+public class MainController implements Initializable {
 
 	@FXML
 	HBox mainBox;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// Set minimum and maximum sizes for the mainBox or other controls if necessary
+		mainBox.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+		mainBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+		// Add listeners for resize events
+		mainBox.widthProperty().addListener((observable, oldValue, newValue) -> {
+			// Adjust layout or perform other actions as needed
+		});
+
+		mainBox.heightProperty().addListener((observable, oldValue, newValue) -> {
+			// Adjust layout or perform other actions as needed
+		});
+	}
 
 	@FXML
 	public void createProjectOp() {
@@ -54,7 +73,7 @@ public class MainController {
 
 	@FXML
 	public void showTicketsOp() {
-		URL url = getClass().getClassLoader().getResource("view/ShowTickets.fxml");
+		URL url = getClass().getClassLoader().getResource("view/ShowTicketsTable.fxml");
 
 		try {
 			AnchorPane pane1 = (AnchorPane) FXMLLoader.load(url);
@@ -70,7 +89,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	public void showCommentsOp() {
 		URL url = getClass().getClassLoader().getResource("view/ShowComments.fxml");
@@ -89,7 +108,6 @@ public class MainController {
 			e.printStackTrace();
 		}
 	}
-
 
 	@FXML
 	public void createTicketOP() {
